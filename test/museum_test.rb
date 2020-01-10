@@ -80,20 +80,25 @@ class MuseumTest <Minitest::Test
 
   def test_there_are_recommended_exhibits_for_a_given_patron
     ###CHALLENGE
-    skip
-    gems_and_minerals = Exhibit.new("Gems and Minerals", 0)
-    dead_sea_scrolls = Exhibit.new("Dead Sea Scrolls", 10)
-    imax = Exhibit.new("IMAX", 15)
+    gems_and_minerals = mock("Gems and Minerals")
+    dead_sea_scrolls = mock("Dead Sea Scrolls")
+    imax = mock("IMAX")
+    gems_and_minerals.stubs(:name).returns("Gems and Minerals")
+    dead_sea_scrolls.stubs(:name).returns("Dead Sea Scrolls")
+    imax.stubs(:name).returns("IMAX")
     dmns = Museum.new("Denver Museum of Nature and Science")
     dmns.add_exhibit(gems_and_minerals)
     dmns.add_exhibit(dead_sea_scrolls)
     dmns.add_exhibit(imax)
-    bob = Patron.new("Bob", 20)
-    bob.add_interest("Dead Sea Scrolls")
-    bob.add_interest("Gems and Minerals")
-    sally = Patron.new("Sally", 20)
-    sally.add_interest("IMAX")
-    #hint: look at the recommend_exhibits() method and figure out which method you need to be called on which object, and then stub from there.
+    bob = mock("Bob")
+    bob.stubs(:add_interest).with("Dead Sea Scrolls").returns(nil)
+    bob.stubs(:add_interest).with("Gems and Minerals").returns(nil)
+    bob.stubs(:interests).returns(["Dead Sea Scrolls", "Gems and Minerals"])
+    sally = mock("Sally")
+    sally.stubs(:add_interest).with("IMAX").returns(nil)
+    sally.stubs(:interests).returns(["IMAX"])
+
+
     assert_equal [gems_and_minerals,dead_sea_scrolls], dmns.recommend_exhibits(bob)
     assert_equal [imax], dmns.recommend_exhibits(sally)
   end
