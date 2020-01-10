@@ -1,6 +1,7 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/museum'
+require 'mocha/minitest'
 
 class MuseumTest <Minitest::Test
 
@@ -17,10 +18,9 @@ class MuseumTest <Minitest::Test
   end
 
   def test_it_can_add_exhibits
-    skip
-    gems_and_minerals = Exhibit.new("Gems and Minerals", 0)
-    dead_sea_scrolls = Exhibit.new("Dead Sea Scrolls", 10)
-    imax = Exhibit.new("IMAX", 15)
+    gems_and_minerals = mock("Gems and Minerals")
+    dead_sea_scrolls = mock("Dead Sea Scrolls")
+    imax = mock("IMAX")
     dmns = Museum.new("Denver Museum of Nature and Science")
     dmns.add_exhibit(gems_and_minerals)
     dmns.add_exhibit(dead_sea_scrolls)
