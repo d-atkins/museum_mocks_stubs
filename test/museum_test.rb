@@ -64,11 +64,13 @@ class MuseumTest <Minitest::Test
   end
 
   def test_it_can_tell_you_the_average_exhibit_cost
-    skip
     dmns = Museum.new("Denver Museum of Nature and Science")
-    gems_and_minerals = Exhibit.new("Gems and Minerals", 4)
-    dead_sea_scrolls = Exhibit.new("Dead Sea Scrolls", 11)
-    imax = Exhibit.new("IMAX", 15)
+    gems_and_minerals = mock("Gems and Minerals")
+    dead_sea_scrolls = mock("Dead Sea Scrolls")
+    imax = mock("IMAX")
+    gems_and_minerals.stubs(:cost).returns(4)
+    dead_sea_scrolls.stubs(:cost).returns(11)
+    imax.stubs(:cost).returns(15)
     dmns.add_exhibit(gems_and_minerals)
     dmns.add_exhibit(dead_sea_scrolls)
     dmns.add_exhibit(imax)
