@@ -49,11 +49,13 @@ class MuseumTest <Minitest::Test
   end
 
   def test_it_can_list_admitted_patrons_by_name
-    skip
     dmns = Museum.new("Denver Museum of Nature and Science")
 
-    bob = Patron.new("Bob", 20)
-    sally = Patron.new("Sally", 20)
+    bob = mock("Bob")
+    sally = mock("Sally")
+
+    bob.stubs(:name).returns("Bob")
+    sally.stubs(:name).returns("Sally")
 
     dmns.admit(bob)
     dmns.admit(sally)
