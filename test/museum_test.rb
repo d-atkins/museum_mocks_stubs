@@ -31,18 +31,16 @@ class MuseumTest <Minitest::Test
 
 
   def test_patrons_starts_empty
-    skip
     dmns = Museum.new("Denver Museum of Nature and Science")
 
     assert_equal [], dmns.patrons
   end
 
   def test_it_can_admit_patrons
-    skip
     dmns = Museum.new("Denver Museum of Nature and Science")
 
-    bob = Patron.new("Bob", 20)
-    sally = Patron.new("Sally", 20)
+    bob = mock("Bob")
+    sally = mock("Sally")
 
     dmns.admit(bob)
     dmns.admit(sally)
